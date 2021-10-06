@@ -1,6 +1,6 @@
 import Router from 'koa-router';
-import { readDirectoryTree, convertToAbsolutePath } from './utils';
-import { config } from './config';
+import { readDirectoryTree, convertToAbsolutePath } from '../utils';
+import { config } from '../config';
 
 const router = new Router();
 
@@ -19,8 +19,8 @@ router.get('/status', async ctx => ctx.body = { status: 'Server is up and runnin
  */
 router.get('/dir-structure', async ctx => {
     const body = {};
-    for (const folder of config.watchFolders) {
-        body[folder] = await readDirectoryTree(convertToAbsolutePath(folder));
+    for (const directory of config.watchDirectories) {
+        body[directory] = await readDirectoryTree(convertToAbsolutePath(directory));
     }
 
     ctx.body = body;

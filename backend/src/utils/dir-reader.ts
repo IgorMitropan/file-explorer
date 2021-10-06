@@ -12,7 +12,5 @@ export const readDirectoryTree = async (dirPath) => {
             : null;
     }
 
-    console.log(normalizedTree);
-
     return normalizedTree;
 }
