@@ -1,0 +1,21 @@
+.directory {
+  padding-left: 20px;
+
+  &__label {
+    display: flex;
+    align-items: center;
+
+    &__name {
+      margin-left: 5px;
+    }
+  }
+
+  &__collapsible {
+    overflow: hidden;
+    height: 0;
+
+    &__open {
+      height: auto;
+    }
+  }
+}

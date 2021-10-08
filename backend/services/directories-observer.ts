@@ -1,10 +1,10 @@
 import chokidar from 'chokidar';
 import { EventEmitter } from 'events';
-import * as Logger from 'bunyan'
-import { convertToAbsolutePath } from '../utils';
+import * as Logger from 'bunyan';
 
 export class DirectoriesObserver extends EventEmitter {
     private logger: Logger;
+
     constructor(logger: Logger, directories: string[]) {
         super();
         this.logger = logger;
@@ -12,18 +12,17 @@ export class DirectoriesObserver extends EventEmitter {
     }
 
     private watchDirectory(directory: string): void {
-        const dirAbsolutePath = convertToAbsolutePath(directory);
         try {
-            this.logger.warn(`Start watching for directory ${dirAbsolutePath} changes`);
+            this.logger.warn(`Start watching for directory ${directory} changes`);
 
-            const watcher = chokidar.watch(dirAbsolutePath, { persistent: true });
+            const watcher = chokidar.watch(directory, { persistent: true });
             watcher.on('ready', () => {
                 watcher.on('all', (
                     eventName: "add" | "addDir" | "change" | "unlink" | "unlinkDir",
                     path: string
                 ) => {
                     // We don't need absolute path, but rather path in the directory we are watching
-                    const pathInDirectory = path.replace(dirAbsolutePath, '');
+                    const pathInDirectory = path.replace(directory, '');
 
                     if (eventName === 'add' || eventName === 'addDir') {
                         this.handleEvent('added', directory, pathInDirectory)

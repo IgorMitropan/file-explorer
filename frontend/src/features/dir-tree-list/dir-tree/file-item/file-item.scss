@@ -1,0 +1,8 @@
+.file-item {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  &__name {
+    margin-left: 5px;
+  }
+}
