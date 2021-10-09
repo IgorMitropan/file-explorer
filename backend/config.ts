@@ -1,12 +1,15 @@
 import { LogLevelString } from 'bunyan';
-import { IConfig } from './interfaces';
+import { IConfig, IWatchDirectory } from './interfaces';
 import { convertToAbsolutePath } from './utils';
 
-const projectDir = process.env.PROJECT_DIR || '/Users/imytropan/WebstormProjects/file-explorer';
-const staticDir = convertToAbsolutePath(process.env.STATIC_DIR || './frontend/build', projectDir);
-const watchDirectories = (process.env.DIRECTORIES || './frontend/build ~/Desktop')
+const projectDir: string = process.env.PROJECT_DIR || '/Users/imytropan/WebstormProjects/file-explorer';
+const staticDir: string = convertToAbsolutePath(process.env.FRONT_BUILD_DIR || './frontend/build', projectDir);
+const watchDirectories: IWatchDirectory[] = (process.env.DIRECTORIES || '')
     .split(' ')
-    .map(dir => convertToAbsolutePath(dir, projectDir));
+    .map(dir => ({
+        name: dir,
+        absPath: convertToAbsolutePath(dir, projectDir)
+    }));
 
 export const config: IConfig = {
     port: parseInt(process.env.PORT, 10) || 3001,

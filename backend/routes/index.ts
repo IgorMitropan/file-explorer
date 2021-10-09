@@ -20,7 +20,7 @@ router.get('/status', async ctx => ctx.body = { status: 'Server is up and runnin
 router.get('/dir-trees', async ctx => {
     const body = {};
     for (const directory of ctx.config.watchDirectories) {
-        body[directory] = await readDirectoryTree(directory);
+        body[directory.name] = await readDirectoryTree(directory.absPath);
     }
 
     ctx.body = body;

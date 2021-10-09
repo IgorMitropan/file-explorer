@@ -10,7 +10,7 @@ import open from 'open';
 import { config } from './config';
 import { routes } from './routes';
 import { DirectoriesObserver, logger } from './services';
-import { DirectoryUpdatePayload, ICustomAppContext } from './interfaces';
+import { IDirectoryUpdatePayload, ICustomAppContext } from './interfaces';
 
 const app = new Koa<any, ICustomAppContext>();
 const httpServer = createServer(app.callback());
@@ -31,10 +31,10 @@ io.on("connection", (socket) => {
     logger.info(`Socket connection successfully established with id - ${socket.id}
     `);
 
-    directoriesObserver.on('added', (payload: DirectoryUpdatePayload) => {
+    directoriesObserver.on('added', (payload: IDirectoryUpdatePayload) => {
         socket.broadcast.emit('added', payload);
     });
-    directoriesObserver.on('removed', (payload: DirectoryUpdatePayload) => {
+    directoriesObserver.on('removed', (payload: IDirectoryUpdatePayload) => {
         socket.broadcast.emit('removed', payload);
     });
 });
@@ -44,7 +44,8 @@ export const server = httpServer.listen(config.port);
 logger.warn(`Koa server is listening on port ${config.port}
 `);
 
-// We use open module to support all OS and serve index.html as an entrypoint of the SPA frontend bundle
+// Opening the default browser to serve index.html as an entrypoint for the React SPA build.
+// We use open module to support all OS.
 open(`http://localhost:${config.port}/`)
     .then(() => logger.warn(`React SPA opened in the default browser from ${config.staticDir}
     `))
