@@ -20,6 +20,7 @@ node ./file-explorer.mjs ~/Desktop/ ./an/index-dir/
 3. Then it opens the default browser to serve index.html as an entrypoint for the React SPA build.
 4. The backend app uses [chokidar](https://github.com/paulmillr/chokidar) to watch passed directories and [socket.io](https://socket.io/) to send notification to the browser.
 5. The frontend app uses [React](https://reactjs.org/) as a component library and [Redux](https://react-redux.js.org/) as an App Store to store directory trees
+6. The recursive algorithm was used both on backend for composing  directory tree structure and on frontend for rendering tree structure. So it has limitation with max nested directories of 10000.
 
 ### Used technologies
 #### Backend:
@@ -38,6 +39,7 @@ node ./file-explorer.mjs ~/Desktop/ ./an/index-dir/
 * [Node Sass](https://github.com/sass/node-sass) preprocessor
 * [React Redux](https://react-redux.js.org/) for App Store
 * [Redux Toolkit](https://redux-toolkit.js.org/) as a simplified approach to work wit Redux
+* [Lodash](https://lodash.com/) methods set and unnset were used for dir tree updates
 * [React Icons](https://react-icons.github.io/react-icons/) for some file types representation
 
 

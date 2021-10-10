@@ -64,7 +64,6 @@
     "whitespace": [true, "check-module", "check-branch", "check-operator", "check-typecast"],
     "import-name": false,
     "no-return-await": true,
-    "comment-type": [true, "doc", "singleline"],
     "indent": [true, "spaces", 2],
     "prefer-array-literal": [true, { "allow-type-parameters": true }]
   }

@@ -14,6 +14,7 @@
     "build:backend": "rm -rf ./dist && tsc",
     "build:frontend": "cd ./frontend && rm -rf ./build && npm run build",
     "watch:backend": "nodemon --watch './backend/**/*' -e ts --exec 'ts-node' ./backend/app.ts",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Igor Mytropan",
@@ -35,10 +36,22 @@
     "@types/koa": "^2.13.4",
     "@types/koa-router": "^7.4.4",
     "dotenv": "^10.0.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.2",
     "nodemon": "^2.0.13",
     "ts-node": "^10.2.1",
     "tslint": "^6.1.3",
     "tslint-config-airbnb": "^5.11.2",
     "typescript": "^4.4.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "tslit --fix"
+    ]
   }
 }

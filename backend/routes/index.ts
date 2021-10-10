@@ -17,13 +17,13 @@ router.get('/status', async ctx => ctx.body = { status: 'Server is up and runnin
 /**
  * Route to get specified directories trees structure
  */
-router.get('/dir-trees', async ctx => {
-    const body = {};
-    for (const directory of ctx.config.watchDirectories) {
-        body[directory.name] = await readDirectoryTree(directory.absPath);
-    }
+router.get('/dir-trees', async (ctx) => {
+  const body = {};
+  for (const directory of ctx.config.watchDirectories) {
+    body[directory.name] = await readDirectoryTree(directory.absPath);
+  }
 
-    ctx.body = body;
+  ctx.body = body;
 });
 
 export const routes = router.routes();

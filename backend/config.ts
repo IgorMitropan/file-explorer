@@ -7,14 +7,14 @@ const staticDir: string = convertToAbsolutePath(process.env.FRONT_BUILD_DIR || '
 const watchDirectories: IWatchDirectory[] = (process.env.DIRECTORIES || '')
     .split(' ')
     .map(dir => ({
-        name: dir,
-        absPath: convertToAbsolutePath(dir, projectDir)
+      name: dir,
+      absPath: convertToAbsolutePath(dir, projectDir)
     }));
 
 export const config: IConfig = {
-    port: parseInt(process.env.PORT, 10) || 3001,
-    logLevel: (process.env.LOG_LEVEL as LogLevelString) || 'warn',
-    projectDir,
-    staticDir,
-    watchDirectories
+  projectDir,
+  staticDir,
+  watchDirectories,
+  port: parseInt(process.env.PORT, 10) || 3001,
+  logLevel: (process.env.LOG_LEVEL as LogLevelString) || 'warn'
 };

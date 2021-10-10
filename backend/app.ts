@@ -25,20 +25,19 @@ app.use(koaBunyanLogger.timeContext());
 app.use(routes);
 app.use(serve(config.staticDir));
 
-const io = new Server(httpServer, { /* options */ });
+const io = new Server(httpServer, {});
 
-io.on("connection", (socket) => {
-    logger.info(`Socket connection successfully established with id - ${socket.id}
-    `);
+io.on('connection', (socket) => {
+  logger.info(`Socket connection successfully established with id - ${socket.id}
+   `);
 
-    directoriesObserver.on('added', (payload: IDirectoryUpdatePayload) => {
-        socket.broadcast.emit('added', payload);
-    });
-    directoriesObserver.on('removed', (payload: IDirectoryUpdatePayload) => {
-        socket.broadcast.emit('removed', payload);
-    });
+  directoriesObserver.on('added', (payload: IDirectoryUpdatePayload) => {
+    socket.broadcast.emit('added', payload);
+  });
+  directoriesObserver.on('removed', (payload: IDirectoryUpdatePayload) => {
+    socket.broadcast.emit('removed', payload);
+  });
 });
-
 
 export const server = httpServer.listen(config.port);
 logger.warn(`Koa server is listening on port ${config.port}
