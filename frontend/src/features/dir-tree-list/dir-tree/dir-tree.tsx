@@ -1,17 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import { Directory } from './directory';
 import { FileItem } from './file-item';
-import { DirTreeStructure } from '../../../interfaces';
+import { IDirTreeStructure } from '../../../interfaces';
 
 import './dir-tree.scss';
 
 interface DirTreeProps {
-    structure: DirTreeStructure;
+    structure: IDirTreeStructure;
 }
 const CN = 'dir-tree';
 
 export const DirTree: FunctionComponent<DirTreeProps> = ({ structure }: DirTreeProps) => {
-    const renderTreeRecursively = (data: DirTreeStructure) => Object.keys(data).map(item => {
+    const renderTreeRecursively = (data: IDirTreeStructure) => Object.keys(data).map(item => {
         // if item has no children, it is a file and we render <File />
         if (data[item] === null) {
             return <FileItem key={item} name={item} />;
@@ -20,7 +20,7 @@ export const DirTree: FunctionComponent<DirTreeProps> = ({ structure }: DirTreeP
             return (
                 <Directory key={item} name={item}>
                     {/* Recursive Call */}
-                    {renderTreeRecursively(data[item] as DirTreeStructure)}
+                    {renderTreeRecursively(data[item] as IDirTreeStructure)}
                 </Directory>
             );
         }

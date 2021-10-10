@@ -4,6 +4,7 @@ import { DiCss3Full, DiHtml5, DiReact } from 'react-icons/di';
 import { SiJavascript, SiTypescript } from 'react-icons/si';
 import { VscJson, VscFileMedia } from 'react-icons/vsc'
 import { GrDocumentTxt } from 'react-icons/gr'
+import { decodePath, getFileExtension } from '../../../../utils';
 
 import './file-item.scss';
 
@@ -28,14 +29,14 @@ const FILE_ICONS: Record<string, ReactNode> = {
 };
 
 export const FileItem: FunctionComponent<FileProps> = ({ name }: FileProps) => {
-    const splitName = name.split('.');
-    const ext = splitName[splitName.length - 1];
+    const decodedName = decodePath(name);
+    const ext = getFileExtension(decodedName);
 
     return (
         <div className={CN}>
             {/* render the extension or fallback to generic file icon  */}
             {FILE_ICONS[ext] || <AiOutlineFile color= 'grey'/>}
-            <span className={`${CN}__name`}>{name}</span>
+            <span className={`${CN}__name`}>{decodedName}</span>
         </div>
     );
 };

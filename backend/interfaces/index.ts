@@ -18,4 +18,5 @@ export interface ICustomAppContext {
 export interface IDirectoryUpdatePayload {
     directory: string;
     path: string;
+    itemType: 'file' | 'directory';
 }
