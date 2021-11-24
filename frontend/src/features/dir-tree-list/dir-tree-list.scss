@@ -1,0 +1,12 @@
+.dir-tree-list {
+  &__item {
+    padding-bottom: 5px;
+    border-bottom: 1px dotted;
+    margin-bottom: 15px;
+
+    &__name {
+      display: flex;
+      margin: 10px 5px;
+    }
+  }
+}
